@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .listenerTopSearch {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .listenerTopSearch button {
+        margin-left: 20px;
+        transform: translateY(-5px);
+    }
+</style>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'listener.js') }}"></script>
+<script>
+  let data = {{data|tojson}}
+  console.log('listener', data)
+</script>
+
+<div class="listenerBox">
+    <div class="listenerTopSearch">
+        <h3>Listener Custom Search</h2>
+        <button type="button" class="btn btn-primary" id="listenerAllSearch">Search All</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="listenerOverview">
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Listener Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Age</th>
+              </tr>
+            </thead>
+            <tbody id="listenerOverviewTbody">
+
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+  .artistTopSearch {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+  }
+
+  .artistTopSearch button {
+      margin-left: 20px;
+      transform: translateY(-5px);
+  }
+</style>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'artist.js') }}"></script>
+<script>
+  let data = {{data|tojson}}
+  console.log('artist', data)
+</script>
+
+<div class="artistBox">
+    <div class="artistTopSearch">
+        <h3>Artist Custom Search</h2>
+        <button type="button" class="btn btn-primary" id="artistAllSearch">Search All</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="artistOverview">
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Artist Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Popularity</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Follower Number</th>
+              </tr>
+            </thead>
+            <tbody id="artistOverviewTbody">
+
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .songTopSearch {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .songTopSearch button {
+        margin-left: 20px;
+        transform: translateY(-5px);
+    }
+</style>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'song.js') }}"></script>
+<script>
+  let data = {{data|tojson}}
+  console.log('song', data)
+</script>
+
+<div class="songBox">
+    <div class="songTopSearch">
+        <h3>Song Custom Search</h2>
+        <button type="button" class="btn btn-primary" id="songAllSearch">Search All</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="songOverview">
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Song Name</th>
+                <th scope="col">Popularity</th>
+                <th scope="col">Dancibility</th>
+                <th scope="col">Energy</th>
+                <th scope="col">Speechiness</th>
+                <th scope="col">Liveness</th>
+                <th scope="col">Tempo</th>
+              </tr>
+            </thead>
+            <tbody id="songOverviewTbody">
+
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}

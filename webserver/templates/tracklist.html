@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .tracklistTopSearch {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .tracklistTopSearch button {
+        margin-left: 20px;
+        transform: translateY(-5px);
+    }
+</style>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'tracklist.js') }}"></script>
+<script>
+  let data = {{data|tojson}}
+  console.log('tracklist', data)
+</script>
+
+<div class="tracklistBox">
+    <div class="tracklistTopSearch">
+        <h3>Tracklist Custom Search</h2>
+        <button type="button" class="btn btn-primary" id="tracklistAllSearch">Search All</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="tracklistOverview">
+        <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tracklist Name</th>
+                <th scope="col">Popularity</th>
+              </tr>
+            </thead>
+            <tbody id="tracklistOverviewTbody">
+
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock %}
