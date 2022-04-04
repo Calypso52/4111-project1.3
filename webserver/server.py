@@ -60,7 +60,7 @@ def album_search_content(searchContent):
   
   ########################################### get all data of album ###########################################
   if searchContent == 'all':
-    rows = ['album_id', 'name', 'release_time', 'popularity', 'artist_id']
+    rows = ['album_id', 'name', 'release_time', 'popularity', 'artist_name']
     query = application.album.fetch_all_albums(None)
     cursor = g.conn.execute(query)
     for item in cursor:
@@ -129,7 +129,7 @@ def song_search_content(searchContent):
   
   ########################################### get all data of song ###########################################
   if searchContent == 'all':
-    rows = ['song_id', 'name', 'popularity', 'dancibility', 'energy', 'speechiness', 'liveness', 'tempo', 'artist_id']
+    rows = ['song_id', 'name', 'popularity', 'dancibility', 'energy', 'speechiness', 'liveness', 'tempo', 'artist_name']
     query = application.song.fetch_all_song(None)
     cursor = g.conn.execute(query)
     for item in cursor:
@@ -152,7 +152,7 @@ def tracklist_search_content(searchContent):
   
   ########################################### get all data of tracklist ###########################################
   if searchContent == 'all':
-    rows = ['list_id', 'name', 'popularity', 'listener_id']
+    rows = ['list_id', 'name', 'popularity', 'create_listener_name']
     query = application.tracklist.fetch_all_tracklist(None)
     cursor = g.conn.execute(query)
     for item in cursor:

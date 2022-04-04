@@ -10,6 +10,7 @@ function getFullSongTable(data) {
                                 <td>${item.speechiness}</td>
                                 <td>${item.liveness}</td>
                                 <td>${item.tempo}</td>
+                                <td>${item.artist_name}</td>
                             </tr>`);
         $("#songOverviewTbody").append(song_item);
     })

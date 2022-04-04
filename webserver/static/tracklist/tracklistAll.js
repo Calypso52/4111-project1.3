@@ -5,6 +5,7 @@ function getFullTracklistTable(data) {
                                 <th scope="row">${i + 1}</th>
                                 <td>${item.name}</td>
                                 <td>${item.popularity}</td>
+                                <td>${item.create_listener_name}</td>
                             </tr>`);
         $("#tracklistOverviewTbody").append(tracklist_item);
     })

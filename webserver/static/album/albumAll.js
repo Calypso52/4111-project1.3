@@ -6,6 +6,7 @@ function getFullAlbumTable(data) {
                                 <td>${item.name}</td>
                                 <td>${item.release_time}</td>
                                 <td>${item.popularity}</td>
+                                <td>${item.artist_name}</td>
                             </tr>`);
         $("#albumOverviewTbody").append(listener_item);
     })

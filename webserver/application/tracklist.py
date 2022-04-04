@@ -1,6 +1,14 @@
 FETCH_TRACKLIST = """
-    SELECT * FROM tracklist TR
-    WHERE 1 = 1
+    SELECT
+        TR.list_id,
+        TR.name,
+        TR.popularity,
+        LI.name
+    FROM 
+        tracklist TR,
+        listener LI
+    WHERE
+        TR.listener_id = LI.listener_id
 """
 
 def fetch_all_tracklist(args):

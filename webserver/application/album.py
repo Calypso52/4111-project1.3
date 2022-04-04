@@ -1,6 +1,15 @@
 FETCH_ALBUM = """
-    SELECT * FROM album AL
-    WHERE 1 = 1
+    SELECT
+        AL.album_id,
+        AL.name,
+        AL.release_time,
+        AL.popularity,
+        AR.name
+    FROM 
+        album AL,
+        artist AR
+    WHERE
+        AL.artist_id = AR.artist_id
 """
 
 def fetch_all_albums(args):
