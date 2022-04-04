@@ -13,8 +13,4 @@ function getFullListenerTable(data) {
 
 $(document).ready(function(){
     getFullListenerTable(data);
-
-    $("#listenerAllSearch").click(function() {
-        window.location.href = `/listener/all`;
-    })
 })

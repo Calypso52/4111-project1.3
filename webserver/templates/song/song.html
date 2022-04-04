@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .songTopSearch {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .songTopSearch button {
+        margin-left: 20px;
+        transform: translateY(-5px);
+    }
+</style>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'song/song.js') }}"></script>
+
+<div class="songBox">
+    <div class="songTopSearch">
+        <h3>Song Custom Search</h2>
+        <button type="button" class="btn btn-primary" id="songAllSearch">Search All</button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <hr>
+    {% block content_song %}
+    {% endblock %}
+    
+</div>
+
+{% endblock %}

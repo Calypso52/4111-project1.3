@@ -1,0 +1,29 @@
+{% extends "album/album.html" %}
+{% block content_album %}
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'album/albumAll.js') }}"></script>
+<script>
+    let data = {{data|tojson}}
+    console.log('album_all', data)
+</script>
+
+<div class="albumOverview">
+    <table class="table table-striped table-sm">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Album ID</th> -->
+            <th scope="col">Album Name</th>
+            <th scope="col">Release Time</th>
+            <th scope="col">Popularity</th>
+            <!-- <th scope="col">Artist ID</th> -->
+          </tr>
+        </thead>
+        <tbody id="albumOverviewTbody">
+
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}

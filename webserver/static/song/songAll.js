@@ -17,8 +17,4 @@ function getFullSongTable(data) {
 
 $(document).ready(function(){
     getFullSongTable(data);
-
-    $("#songAllSearch").click(function() {
-        window.location.href = `/song/all`;
-    })
 })

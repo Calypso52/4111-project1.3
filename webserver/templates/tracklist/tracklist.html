@@ -14,11 +14,7 @@
     }
 </style>
 
-<script type="text/javascript" src="{{ url_for('static', filename = 'tracklist.js') }}"></script>
-<script>
-  let data = {{data|tojson}}
-  console.log('tracklist', data)
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'tracklist/tracklist.js') }}"></script>
 
 <div class="tracklistBox">
     <div class="tracklistTopSearch">
@@ -40,20 +36,10 @@
     <br>
     <br>
 
-    <div class="tracklistOverview">
-        <table class="table table-striped">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tracklist Name</th>
-                <th scope="col">Popularity</th>
-              </tr>
-            </thead>
-            <tbody id="tracklistOverviewTbody">
-
-            </tbody>
-          </table>
-    </div>
+    <hr>
+    {% block content_tracklist %}
+    {% endblock %}
+    
 </div>
 
 {% endblock %}

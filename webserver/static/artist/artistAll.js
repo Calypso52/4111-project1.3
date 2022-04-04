@@ -15,8 +15,4 @@ function getFullArtistTable(data) {
 
 $(document).ready(function(){
     getFullArtistTable(data);
-
-    $("#artistAllSearch").click(function() {
-        window.location.href = `/artist/all`;
-    })
 })

@@ -50,9 +50,7 @@ def index():
 # route to album interface
 @app.route('/album')
 def album():
-  result = []
-  
-  return render_template("album.html", **dict(data = result))
+  return render_template("album/album.html")
 
 # search router of the album interface
 @app.route('/album/<searchContent>')
@@ -68,15 +66,13 @@ def album_search_content(searchContent):
     for item in cursor:
       result.append(dict(zip(rows, item)))
   
-  return render_template("album.html", **dict(data = result))
+  return render_template("album/albumAll.html", **dict(data = result))
 
 
 # route to artist interface
 @app.route('/artist')
 def artist():
-  result = []
-  
-  return render_template("artist.html", **dict(data = result))
+  return render_template("artist/artist.html")
 
 
 # search router of the artist interface
@@ -93,15 +89,13 @@ def artist_search_content(searchContent):
     for item in cursor:
       result.append(dict(zip(rows, item)))
   
-  return render_template("artist.html", **dict(data = result))
+  return render_template("artist/artistAll.html", **dict(data = result))
 
 
 # route to listener interface
 @app.route('/listener')
 def listener():
-  result = []
-  
-  return render_template("listener.html", **dict(data = result))
+  return render_template("listener/listener.html")
 
 
 # search router of the listener interface
@@ -118,15 +112,13 @@ def listener_search_content(searchContent):
     for item in cursor:
       result.append(dict(zip(rows, item)))
   
-  return render_template("listener.html", **dict(data = result))
+  return render_template("listener/listenerAll.html", **dict(data = result))
 
 
 # route to song interface
 @app.route('/song')
 def song():
-  result = []
-  
-  return render_template("song.html", **dict(data = result))
+  return render_template("song/song.html")
 
 
 # search router of the song interface
@@ -143,15 +135,13 @@ def song_search_content(searchContent):
     for item in cursor:
       result.append(dict(zip(rows, item)))
   
-  return render_template("song.html", **dict(data = result))
+  return render_template("song/songAll.html", **dict(data = result))
 
 
 # route to tracklist interface
 @app.route('/tracklist')
 def tracklist():
-  result = []
-  
-  return render_template("tracklist.html", **dict(data = result))
+  return render_template("tracklist/tracklist.html")
 
 
 # search router of the tracklist interface
@@ -168,7 +158,7 @@ def tracklist_search_content(searchContent):
     for item in cursor:
       result.append(dict(zip(rows, item)))
   
-  return render_template("tracklist.html", **dict(data = result))
+  return render_template("tracklist/tracklistAll.html", **dict(data = result))
 
 
 # Example of adding new data to the database

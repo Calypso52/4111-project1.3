@@ -12,8 +12,4 @@ function getFullTracklistTable(data) {
 
 $(document).ready(function(){
     getFullTracklistTable(data);
-
-    $("#tracklistAllSearch").click(function() {
-        window.location.href = `/tracklist/all`;
-    })
 })

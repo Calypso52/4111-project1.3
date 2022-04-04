@@ -14,11 +14,7 @@
     }
 </style>
 
-<script type="text/javascript" src="{{ url_for('static', filename = 'listener.js') }}"></script>
-<script>
-  let data = {{data|tojson}}
-  console.log('listener', data)
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'listener/listener.js') }}"></script>
 
 <div class="listenerBox">
     <div class="listenerTopSearch">
@@ -40,21 +36,9 @@
     <br>
     <br>
 
-    <div class="listenerOverview">
-        <table class="table table-striped">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Listener Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Age</th>
-              </tr>
-            </thead>
-            <tbody id="listenerOverviewTbody">
-
-            </tbody>
-          </table>
-    </div>
+    <hr>
+    {% block content_listener %}
+    {% endblock %}
 </div>
 
 {% endblock %}
