@@ -7,6 +7,10 @@ INSERT_LISTENER = """
     INSERT INTO listener VALUES ('{listener_id}', '{name}', '{gender}', '{age}')
 """
 
+DELETE_LISTENER = """
+    DELETE FROM listener LI WHERE LI.name = '{name}'
+"""
+
 queryMap = {
     "listener_id": " AND LI.listener_id IN ({})",
     "name": " AND LI.name LIKE '%%{}%%'",
@@ -27,3 +31,8 @@ def add_listener(id, args):
     add_ls = INSERT_LISTENER
     add_ls = add_ls.format(listener_id = str(id), name = args["name"], gender = args["gender"], age = int(args["age"]))
     return add_ls
+
+def delete_listener(args):
+    delete_ls = DELETE_LISTENER
+    delete_ls = delete_ls.format(name = args["name"])
+    return delete_ls

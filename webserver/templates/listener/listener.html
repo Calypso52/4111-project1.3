@@ -36,10 +36,11 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
-                role="tab" aria-controls="contact" aria-selected="false">Function 3</button>
+                role="tab" aria-controls="contact" aria-selected="false">Delete Listener</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
+        <!-- search listener function -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <br>
             <form action="/listener/find" method="POST">
@@ -64,6 +65,7 @@
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
+        <!-- add listener function -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <br>
             <form action="/listener/add" method="POST">
@@ -88,8 +90,16 @@
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>
+        <!-- delete listener function -->
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            ...3
+            <br>
+            <form action="/listener/delete" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
         </div>
     </div>
 

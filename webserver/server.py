@@ -101,7 +101,6 @@ def listener_search_content(searchContent):
   # store query result array
   result = []
   
-  ########################################### get all data of listener ###########################################
   if searchContent == 'all':
     rows = ['listener_id', 'name', 'gender', 'age']
     query = application.listener.fetch_all_listener(None)
@@ -114,15 +113,19 @@ def listener_search_content(searchContent):
     cursor = g.conn.execute(query)
     return redirect("/listener")
   elif searchContent == 'find':
-    print('form =', request.form)
     rows = ['listener_id', 'name', 'gender', 'age']
     query = application.listener.fetch_all_listener(request.form)
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
     return render_template("listener/listenerAll.html", **dict(data = result))
+  elif searchContent == 'delete':
+    print('form =', request.form)
+    query = application.listener.delete_listener(request.form)
+    cursor = g.conn.execute(query)
+    return redirect("/listener")
   
-
+  
 # route to song interface
 @app.route('/song')
 def song():
