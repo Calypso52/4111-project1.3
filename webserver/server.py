@@ -3,6 +3,7 @@ import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
+import uuid
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -25,8 +26,6 @@ engine = create_engine(DATABASEURI)
 def before_request():
   try:
     g.conn = engine.connect()
-    print("******************** connection to psql is successful!! ********************")
-    print('')
   except:
     print("uh oh, problem connecting to database")
     import traceback; traceback.print_exc()
@@ -37,8 +36,6 @@ def before_request():
 def teardown_request(exception):
   try:
     g.conn.close()
-    print('')
-    print("******************** connection to psql is closed!! ************************")
   except Exception as e:
     pass
 
@@ -99,7 +96,7 @@ def listener():
 
 
 # search router of the listener interface
-@app.route('/listener/<searchContent>')
+@app.route('/listener/<searchContent>', methods=["POST", "GET"])
 def listener_search_content(searchContent):
   # store query result array
   result = []
@@ -111,9 +108,12 @@ def listener_search_content(searchContent):
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
+    return render_template("listener/listenerAll.html", **dict(data = result))
+  elif searchContent == 'add':
+    query = application.listener.add_listener(uuid.uuid1(), request.form)
+    cursor = g.conn.execute(query)
+    return redirect("/listener")
   
-  return render_template("listener/listenerAll.html", **dict(data = result))
-
 
 # route to song interface
 @app.route('/song')
