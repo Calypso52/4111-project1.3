@@ -113,6 +113,14 @@ def listener_search_content(searchContent):
     query = application.listener.add_listener(uuid.uuid1(), request.form)
     cursor = g.conn.execute(query)
     return redirect("/listener")
+  elif searchContent == 'find':
+    print('form =', request.form)
+    rows = ['listener_id', 'name', 'gender', 'age']
+    query = application.listener.fetch_all_listener(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("listener/listenerAll.html", **dict(data = result))
   
 
 # route to song interface
