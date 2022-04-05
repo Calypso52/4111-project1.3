@@ -13,8 +13,8 @@ DELETE_LISTENER = """
 
 queryMap = {
     "listener_id": " AND LI.listener_id IN ({})",
-    "name": " AND LI.name LIKE '%%{}%%'",
-    "gender": " AND LI.gender = '{}'",
+    "name": " AND lower(LI.name) LIKE lower('%%{}%%')",
+    "gender": " AND lower(LI.gender) = lower('{}')",
     "age": " AND LI.age >= {}"
 }
 

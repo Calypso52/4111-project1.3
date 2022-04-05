@@ -12,6 +12,10 @@
         margin-left: 20px;
         transform: translateY(-5px);
     }
+
+    #rangeval {
+        font-weight: bold;
+    }
 </style>
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'tracklist/tracklist.js') }}"></script>
@@ -24,18 +28,75 @@
 
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Search Tracklist</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Add Tracklist</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                role="tab" aria-controls="contact" aria-selected="false">Delete Tracklist</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <!-- search Tracklist function -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <br>
+            <form action="/tracklist/find" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tracklist Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="creator" class="form-label">Listener Creator</label>
+                    <input type="text" class="form-control" id="creator" name="creator">
+                </div>
+                <div class="mb-3">
+                    <label for="popularity" class="form-label">Tracklist Popularity(At least)</label>
+                    <input type="text" class="form-control" id="popularity" name="popularity">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <!-- add Tracklist function -->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <br>
+            <form action="/tracklist/add" method="POST">
+                <div class="mb-3">
+                    <label for="creator" class="form-label">Tracklist Creator Listener(Case Sensitive)</label>
+                    <input type="text" class="form-control" id="creator" name="creator" required>
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tracklist Title(Case Sensitive)</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="popularity" class="form-label">Tracklist Popularity(0 - 100)</label>
+                    <input type="range" class="form-range" id="popularity" name="popularity">
+                    <span id="rangeval">50</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <!-- delete Tracklist function -->
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <br>
+            <form action="/listener/delete" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <br>
     <hr>
     {% block content_tracklist %}
     {% endblock %}

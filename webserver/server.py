@@ -109,10 +109,12 @@ def listener_search_content(searchContent):
       result.append(dict(zip(rows, item)))
     return render_template("listener/listenerAll.html", **dict(data = result))
   elif searchContent == 'add':
+    print('form =', request.form)
     query = application.listener.add_listener(uuid.uuid1(), request.form)
     cursor = g.conn.execute(query)
     return redirect("/listener")
   elif searchContent == 'find':
+    print('form =', request.form)
     rows = ['listener_id', 'name', 'gender', 'age']
     query = application.listener.fetch_all_listener(request.form)
     cursor = g.conn.execute(query)
@@ -156,36 +158,40 @@ def tracklist():
 
 
 # search router of the tracklist interface
-@app.route('/tracklist/<searchContent>')
+@app.route('/tracklist/<searchContent>', methods=["POST", "GET"])
 def tracklist_search_content(searchContent):
   # store query result array
   result = []
   
-  ########################################### get all data of tracklist ###########################################
   if searchContent == 'all':
     rows = ['list_id', 'name', 'popularity', 'create_listener_name']
     query = application.tracklist.fetch_all_tracklist(None)
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
-  
-  return render_template("tracklist/tracklistAll.html", **dict(data = result))
-
-
-# Example of adding new data to the database
-# @app.route('/add', methods=['POST'])
-# def add():
-  
-#   query = application.index_insert.add_one_scientist(request.form)
-#   g.conn.execute(query)
-  
-#   return redirect('/')
-
-
-# @app.route('/login')
-# def login():
-#     abort(401)
-#     this_is_never_executed()
+    return render_template("tracklist/tracklistAll.html", **dict(data = result))
+  elif searchContent == 'find':
+    print('form =', request.form)
+    rows = ['list_id', 'name', 'popularity', 'create_listener_name']
+    query = application.tracklist.fetch_all_tracklist(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("tracklist/tracklistAll.html", **dict(data = result))
+  elif searchContent == 'add':
+    print('form =', request.form)
+    # get creator name
+    rows = ['listener_id']
+    query = application.tracklist.fetch_creator_listener_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_listener_id =', result[0]["listener_id"])
+      bingo_listener_id = result[0]["listener_id"]
+      query = application.tracklist.add_tracklist(uuid.uuid1(), bingo_listener_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/tracklist")
 
 
 if __name__ == "__main__":

@@ -24,17 +24,56 @@
 
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Find Song</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Function 2</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                role="tab" aria-controls="contact" aria-selected="false">Function 3</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <!-- search song function -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <br>
+            <form action="/song/find" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Song Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">At least how old</label>
+                    <input type="text" class="form-control" id="age" name="age">
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
+                    <label class="form-check-label" for="gender">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F">
+                    <label class="form-check-label" for="gender">Female</label>
+                </div>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <!-- ??? function -->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            
+        </div>
+        <!-- ??? function -->
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            
+        </div>
+    </div>
 
     <hr>
     {% block content_song %}
