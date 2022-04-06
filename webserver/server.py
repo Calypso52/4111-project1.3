@@ -103,7 +103,22 @@ def artist_search_content(searchContent):
     query = application.artist.delete_artist(request.form)
     cursor = g.conn.execute(query)
     return redirect("/artist")
-
+  elif searchContent == "mostPopularMale" or searchContent == "mostPopularFemale":
+    rows = ['artist_id', 'name', 'gender', 'popularity', 'genre', 'follower']
+    gender = 'M' if searchContent == "mostPopularMale" else 'F'
+    query = application.artist.FETCH__popularart(gender)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("artist/artistAll.html", **dict(data = result))
+  elif searchContent == "mostFollowerMale" or searchContent == "mostFollowerFemale":
+    rows = ['artist_id', 'name', 'gender', 'popularity', 'genre', 'follower']
+    gender = 'M' if searchContent == "mostFollowerMale" else 'F'
+    query = application.artist.FETCH__followerart(gender)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("artist/artistAll.html", **dict(data = result))
 
 # route to listener interface
 @app.route('/listener')
@@ -199,6 +214,13 @@ def song_search_content(searchContent):
       query = application.song.delete_song(bingo_artist_id, request.form)
       cursor = g.conn.execute(query)
     return redirect("/song")
+  else:
+    rows = ['song_id', 'name', 'popularity', 'dancibility', 'energy', 'speechiness', 'liveness', 'tempo', 'artist_name']
+    query = application.song.FETCH__trending_song(searchContent)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("song/songAll.html", **dict(data = result))
 
 
 # route to tracklist interface
@@ -256,6 +278,13 @@ def tracklist_search_content(searchContent):
       query = application.tracklist.delete_tracklist(bingo_listener_id, request.form)
       cursor = g.conn.execute(query)
     return redirect("/tracklist")
+  elif searchContent == 'mostPopular':
+    rows = ['list_id', 'name', 'popularity', 'create_listener_name']
+    query = application.tracklist.FETCH__popularlist()
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("tracklist/tracklistAll.html", **dict(data = result))
 
 
 if __name__ == "__main__":

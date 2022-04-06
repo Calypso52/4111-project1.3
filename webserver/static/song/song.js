@@ -3,6 +3,30 @@ $(document).ready(function(){
         window.location.href = `/song/all`;
     })
 
+    $("#songMostPopularSearch").click(function() {
+        window.location.href = `/song/popularity`;
+    })
+
+    $("#songMostDancibilitySearch").click(function() {
+        window.location.href = `/song/dancibility`;
+    })
+
+    $("#songMostEnergySearch").click(function() {
+        window.location.href = `/song/energy`;
+    })
+
+    $("#songMostSpeechinessSearch").click(function() {
+        window.location.href = `/song/speechiness`;
+    })
+
+    $("#songMostLivenessSearch").click(function() {
+        window.location.href = `/song/liveness`;
+    })
+
+    $("#songMostTempoSearch").click(function() {
+        window.location.href = `/song/tempo`;
+    })
+
     $(document).on('input', "#songPopularityFind", function() {
         let val = $(this).val();
         $("#songPopularityValFind").html(val);

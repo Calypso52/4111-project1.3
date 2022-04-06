@@ -23,6 +23,21 @@ DELETE_TRACKLIST = """
     DELETE FROM tracklist TR WHERE TR.name = '{name}' AND TR.listener_id = '{listener_id}'
 """
 
+FETCH_trending_list = """
+    SELECT 
+        TR.list_id,
+        TR.name,
+        TR.popularity,
+        LI.name
+    FROM 
+        tracklist TR,
+        listener LI
+    WHERE
+        TR.listener_id = LI.listener_id
+    order by popularity DESC
+    limit 10
+"""
+
 queryMap = {
     "TR.list_id": " AND TR.list_id IN ({})",
     "TR.name": " AND lower(TR.name) LIKE lower('%%{}%%')",
@@ -53,3 +68,7 @@ def delete_tracklist(bingo_listener_id, args):
     delete_tr = DELETE_TRACKLIST
     delete_tr = delete_tr.format(name = args["name"], listener_id = bingo_listener_id)
     return delete_tr
+
+def FETCH__popularlist():
+    query = FETCH_trending_list
+    return query

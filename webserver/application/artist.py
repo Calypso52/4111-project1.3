@@ -11,6 +11,22 @@ DELETE_ARTIST = """
     DELETE FROM artist AR WHERE AR.name = '{name}'
 """
 
+FETCH_trending_art = """
+SELECT *
+FROM artist
+WHERE gender = '{gender}'
+order by popularity DESC
+limit 10
+"""
+
+FETCH_follower_art = """
+SELECT *
+FROM artist
+WHERE gender = '{gender}'
+order by follower DESC
+limit 10
+"""
+
 queryMap = {
     "artist_id": " AND AR.artist_id IN ({})",
     "name": " AND lower(AR.name) LIKE lower('%%{}%%')",
@@ -45,3 +61,13 @@ def delete_artist(args):
     delete_ar = DELETE_ARTIST
     delete_ar = delete_ar.format(name = args["name"])
     return delete_ar
+
+def FETCH__popularart(gender):
+    query = FETCH_trending_art
+    query = query.format(gender = gender)
+    return query
+
+def FETCH__followerart(gender):
+    query = FETCH_follower_art
+    query = query.format(gender = gender)
+    return query

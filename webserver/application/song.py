@@ -28,6 +28,26 @@ DELETE_SONG = """
     DELETE FROM song S WHERE S.name = '{name}' AND S.artist_id = '{artist_id}'
 """
 
+FETCH_trending_song = """
+    SELECT 
+        S.song_id,
+        S.name,
+        S.popularity,
+        S.dancibility,
+        S.energy,
+        S.speechiness,
+        S.liveness,
+        S.tempo,
+        A.name
+    FROM 
+        song S, 
+        artist A
+    WHERE
+        S.artist_id = A.artist_id
+    order by {col} DESC
+    limit 10
+"""
+
 queryMap = {
     "S.name": " AND lower(S.name) LIKE lower('%%{}%%')",
     "S.popularity": " AND S.popularity >= {}",
@@ -75,3 +95,8 @@ def delete_song(artist_id, args):
     delete_song = DELETE_SONG
     delete_song = delete_song.format(name = args["name"], artist_id = artist_id)
     return delete_song
+
+def FETCH__trending_song(col):
+    query = FETCH_trending_song
+    query = query.format(col = col)
+    return query

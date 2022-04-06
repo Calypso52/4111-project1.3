@@ -12,6 +12,14 @@
         margin-left: 20px;
         transform: translateY(-5px);
     }
+
+    .number {
+        font-weight: bold;
+    }
+
+    #other button {
+        width: 300px;
+    }
 </style>
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'song/song.js') }}"></script>
@@ -38,6 +46,10 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                 role="tab" aria-controls="contact" aria-selected="false">Delete Song</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="other-tab" data-bs-toggle="tab" data-bs-target="#other" type="button"
+                role="tab" aria-controls="other" aria-selected="false">Advanced Searching</button>
+        </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <!-- search song function -->
@@ -57,37 +69,37 @@
                     <br>
                     <label for="songPopularityFind" class="form-label">Popularity(At least)</label>
                     <input type="range" class="form-range" id="songPopularityFind" name="songPopularityFind" value="0">
-                    <span id="songPopularityValFind">0</span>
+                    <span id="songPopularityValFind" class="number">0</span>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="songDancibilityFind" class="form-label">Dancibility(At least)</label>
                     <input type="range" class="form-range" min="0" max="1" step="0.001" id="songDancibilityFind" name="songDancibilityFind" value="0">
-                    <span id="songDancibilityValFind">0</span>
+                    <span id="songDancibilityValFind" class="number">0</span>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="songEnergyFind" class="form-label">Energy(At least)</label>
                     <input type="range" class="form-range" min="0" max="1" step="0.001" id="songEnergyFind" name="songEnergyFind" value="0">
-                    <span id="songEnergyValFind">0</span>
+                    <span id="songEnergyValFind" class="number">0</span>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="songSpeechinessFind" class="form-label">Speechiness(At least)</label>
                     <input type="range" class="form-range" min="0" max="0.2" step="0.0001" id="songSpeechinessFind" name="songSpeechinessFind" value="0">
-                    <span id="songSpeechinessValFind">0</span>
+                    <span id="songSpeechinessValFind" class="number">0</span>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="songLivenessFind" class="form-label">Liveness(At least)</label>
                     <input type="range" class="form-range" min="0" max="1" step="0.001" id="songLivenessFind" name="songLivenessFind" value="0">
-                    <span id="songLivenessValFind">0</span>
+                    <span id="songLivenessValFind" class="number">0</span>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="songTempoFind" class="form-label">Tempo(At least)</label>
                     <input type="range" class="form-range" min="0" max="200" id="songTempoFind" name="songTempoFind" value="0">
-                    <span id="songTempoValFind">0</span>
+                    <span id="songTempoValFind" class="number">0</span>
                 </div>
                 <div class="col-md-12">
                     <br>
@@ -134,6 +146,35 @@
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </div>
             </form>
+        </div>
+        <!-- advanced songs searching -->
+        <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+            <div class="row">
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostPopularSearch">Most Popular Songs</button>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostDancibilitySearch">Most Dancibility Songs</button>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostEnergySearch">Most Energy Songs</button>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostSpeechinessSearch">Most Speechiness Songs</button>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostLivenessSearch">Most Liveness Songs</button>
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <button type="button" class="btn btn-primary" id="songMostTempoSearch">Most Tempo Songs</button>
+                </div>
+            </div>
         </div>
     </div>
 

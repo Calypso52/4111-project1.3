@@ -3,6 +3,22 @@ $(document).ready(function(){
         window.location.href = `/artist/all`;
     })
 
+    $("#artistMostPopularMaleSearch").click(function() {
+        window.location.href = `/artist/mostPopularMale`;
+    })
+
+    $("#artistMostPopularFemaleSearch").click(function() {
+        window.location.href = `/artist/mostPopularFemale`;
+    })
+
+    $("#artistMostFollowerMaleSearch").click(function() {
+        window.location.href = `/artist/mostFollowerMale`;
+    })
+
+    $("#artistMostFollowerFemaleSearch").click(function() {
+        window.location.href = `/artist/mostFollowerFemale`;
+    })
+
     // switch bar control
     var triggerTabList = [].slice.call(document.querySelectorAll('#myTab button'))
     triggerTabList.forEach(function (triggerEl) {

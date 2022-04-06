@@ -3,6 +3,10 @@ $(document).ready(function(){
         window.location.href = `/tracklist/all`;
     })
 
+    $("#tracklistMostPopularSearch").click(function() {
+      window.location.href = `/tracklist/mostPopular`;
+  })
+
     $(document).on('input', "#popularity", function() {
         let val = $(this).val();
         $("#rangeval").html(val);
