@@ -16,7 +16,11 @@ INSERT_TRACKLIST = """
 """
 
 FETCH_CREATOR_LISTENER = """
-    SELECT L.listener_id FROM listener L WHERE L.name = '{}'
+    SELECT L.listener_id FROM listener L WHERE lower(L.name) = lower('{}')
+"""
+
+DELETE_TRACKLIST = """
+    DELETE FROM tracklist TR WHERE TR.name = '{name}' AND TR.listener_id = '{listener_id}'
 """
 
 queryMap = {
@@ -44,3 +48,8 @@ def add_tracklist(tracklist_id, creator_listener_id, args):
     add_tr = INSERT_TRACKLIST
     add_tr = add_tr.format(list_id = str(tracklist_id), name = args["title"], popularity = int(args["popularity"]), listener_id = creator_listener_id)
     return add_tr
+
+def delete_tracklist(bingo_listener_id, args):
+    delete_tr = DELETE_TRACKLIST
+    delete_tr = delete_tr.format(name = args["name"], listener_id = bingo_listener_id)
+    return delete_tr

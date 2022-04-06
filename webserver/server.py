@@ -73,20 +73,36 @@ def artist():
 
 
 # search router of the artist interface
-@app.route('/artist/<searchContent>')
+@app.route('/artist/<searchContent>', methods=["POST", "GET"])
 def artist_search_content(searchContent):
   # store query result array
   result = []
   
-  ########################################### get all data of artist ###########################################
   if searchContent == 'all':
     rows = ['artist_id', 'name', 'gender', 'popularity', 'genre', 'follower']
     query = application.artist.fetch_all_artist(None)
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
-  
-  return render_template("artist/artistAll.html", **dict(data = result))
+    return render_template("artist/artistAll.html", **dict(data = result))
+  elif searchContent == 'find':
+    print('form =', request.form)
+    rows = ['artist_id', 'name', 'gender', 'popularity', 'genre', 'follower']
+    query = application.artist.fetch_all_artist(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("artist/artistAll.html", **dict(data = result))
+  elif searchContent == 'add':
+    print('form =', request.form)
+    query = application.artist.add_artist(uuid.uuid1(), request.form)
+    cursor = g.conn.execute(query)
+    return redirect("/artist")
+  elif searchContent == 'delete':
+    print('form =', request.form)
+    query = application.artist.delete_artist(request.form)
+    cursor = g.conn.execute(query)
+    return redirect("/artist")
 
 
 # route to listener interface
@@ -190,6 +206,20 @@ def tracklist_search_content(searchContent):
       print('bingo_listener_id =', result[0]["listener_id"])
       bingo_listener_id = result[0]["listener_id"]
       query = application.tracklist.add_tracklist(uuid.uuid1(), bingo_listener_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/tracklist")
+  elif searchContent == 'delete':
+    print('form =', request.form)
+    # get creator name
+    rows = ['listener_id']
+    query = application.tracklist.fetch_creator_listener_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_listener_id =', result[0]["listener_id"])
+      bingo_listener_id = result[0]["listener_id"]
+      query = application.tracklist.delete_tracklist(bingo_listener_id, request.form)
       cursor = g.conn.execute(query)
     return redirect("/tracklist")
 

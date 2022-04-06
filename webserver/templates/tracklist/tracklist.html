@@ -47,51 +47,85 @@
         <!-- search Tracklist function -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <br>
-            <form action="/tracklist/find" method="POST">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Tracklist Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+            <form action="/tracklist/find" method="POST" class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="title" class="form-label">Tracklist Title</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="creator" class="form-label">Listener Creator</label>
-                    <input type="text" class="form-control" id="creator" name="creator">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="creator" class="form-label">Listener Creator</label>
+                        <input type="text" class="form-control" id="creator" name="creator">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="popularity" class="form-label">Tracklist Popularity(At least)</label>
-                    <input type="text" class="form-control" id="popularity" name="popularity">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="popularity" class="form-label">Tracklist Popularity(At least)</label>
+                        <input type="text" class="form-control" id="popularity" name="popularity">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Search</button>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
             </form>
         </div>
         <!-- add Tracklist function -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <br>
-            <form action="/tracklist/add" method="POST">
-                <div class="mb-3">
-                    <label for="creator" class="form-label">Tracklist Creator Listener(Case Sensitive)</label>
-                    <input type="text" class="form-control" id="creator" name="creator" required>
+            <form action="/tracklist/add" method="POST" class="row needs-validation" novalidate>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="creator" class="form-label">Tracklist Creator Listener(Case Sensitive)</label>
+                        <input type="text" class="form-control" id="creator" name="creator" required>
+                        <div class="invalid-feedback">Please choose a creator.</div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="title" class="form-label">Tracklist Title(Case Sensitive)</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="title" class="form-label">Tracklist Title(Case Sensitive)</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                        <div class="invalid-feedback">Please input the tracklist.</div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="popularity" class="form-label">Tracklist Popularity(0 - 100)</label>
-                    <input type="range" class="form-range" id="popularity" name="popularity">
-                    <span id="rangeval">50</span>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="popularity" class="form-label">Tracklist Popularity(0 - 100)</label>
+                        <input type="range" class="form-range" id="popularity" name="popularity" value="0">
+                        <span id="rangeval">0</span>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <br>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
             </form>
         </div>
         <!-- delete Tracklist function -->
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <br>
-            <form action="/listener/delete" method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name">
+            <form action="/tracklist/delete" method="POST" class="row needs-validation" novalidate>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="name" class="form-label">Tracklist Name(Case Sensitive)</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="invalid-feedback">Please choose a tracklist.</div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="creator" class="form-label">Creator Name(Case Insensitive)</label>
+                        <input type="text" class="form-control" id="creator" name="creator" required>
+                        <div class="invalid-feedback">Please input a listener name.</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
             </form>
         </div>
     </div>
