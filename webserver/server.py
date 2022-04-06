@@ -151,20 +151,54 @@ def song():
 
 
 # search router of the song interface
-@app.route('/song/<searchContent>')
+@app.route('/song/<searchContent>', methods=["POST", "GET"])
 def song_search_content(searchContent):
   # store query result array
   result = []
   
-  ########################################### get all data of song ###########################################
   if searchContent == 'all':
     rows = ['song_id', 'name', 'popularity', 'dancibility', 'energy', 'speechiness', 'liveness', 'tempo', 'artist_name']
     query = application.song.fetch_all_song(None)
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
-  
-  return render_template("song/songAll.html", **dict(data = result))
+    return render_template("song/songAll.html", **dict(data = result))
+  elif searchContent == 'find':
+    print('form =', request.form)
+    rows = ['song_id', 'name', 'popularity', 'dancibility', 'energy', 'speechiness', 'liveness', 'tempo', 'artist_name']
+    query = application.song.fetch_all_song(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("song/songAll.html", **dict(data = result))
+  elif searchContent == 'add':
+    print('form =', request.form)
+    # get creator name
+    rows = ['artist_id']
+    query = application.song.fetch_artist_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_artist_id =', result[0]["artist_id"])
+      bingo_artist_id = result[0]["artist_id"]
+      query = application.song.add_song(uuid.uuid1(), bingo_artist_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/song")
+  elif searchContent == 'delete':
+    print('form =', request.form)
+    # get creator name
+    rows = ['artist_id']
+    query = application.song.fetch_artist_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_artist_id =', result[0]["artist_id"])
+      bingo_artist_id = result[0]["artist_id"]
+      query = application.song.delete_song(bingo_artist_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/song")
 
 
 # route to tracklist interface
