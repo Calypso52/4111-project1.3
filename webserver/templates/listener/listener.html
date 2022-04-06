@@ -43,62 +43,88 @@
         <!-- search listener function -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <br>
-            <form action="/listener/find" method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Listener Name(Case Insensitive)</label>
-                    <input type="text" class="form-control" id="name" name="name">
+            <form action="/listener/find" method="POST" class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="name" class="form-label">Listener Name(Case Insensitive)</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="age" class="form-label">At least how old</label>
-                    <input type="text" class="form-control" id="age" name="age">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <br>
+                        <label for="age" class="form-label">At least how old</label>
+                        <input type="text" class="form-control" id="age" name="age">
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
-                    <label class="form-check-label" for="gender">Male</label>
+                <div class="col-md-12">
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
+                        <label class="form-check-label" for="gender">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F">
+                        <label class="form-check-label" for="gender">Female</label>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F">
-                    <label class="form-check-label" for="gender">Female</label>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </div>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
         <!-- add listener function -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <br>
-            <form action="/listener/add" method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name(Case Sensitive)</label>
-                    <input type="text" class="form-control" id="name" name="name">
+            <form action="/listener/add" method="POST" class="row needs-validation" novalidate>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="name" class="form-label">Name(Case Sensitive)</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="invalid-feedback">Please input listener name.</div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <input type="text" class="form-control" id="age" name="age">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <br>
+                        <label for="age" class="form-label">Age</label>
+                        <input type="text" class="form-control" id="age" name="age" required>
+                        <div class="invalid-feedback">Please input listener age.</div>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
-                    <label class="form-check-label" for="gender">Male</label>
+                <div class="col-md-12">
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" required>
+                        <label class="form-check-label" for="gender">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F" required>
+                        <label class="form-check-label" for="gender">Female</label>
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F">
-                    <label class="form-check-label" for="gender">Female</label>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary">Add</button>
             </form>
         </div>
         <!-- delete listener function -->
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <br>
-            <form action="/listener/delete" method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name(Case Sensitive)</label>
-                    <input type="text" class="form-control" id="name" name="name">
+            <form action="/listener/delete" method="POST" class="row needs-validation" novalidate>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <label for="name" class="form-label">Name(Case Sensitive)</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="invalid-feedback">Please input listener name.</div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <div class="col-md-12">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
             </form>
         </div>
     </div>

@@ -4,15 +4,15 @@ $(document).ready(function(){
     })
 
     // switch bar control
-    // var triggerTabList = [].slice.call(document.querySelectorAll('#myTab button'))
-    // triggerTabList.forEach(function (triggerEl) {
-    //     var tabTrigger = new bootstrap.Tab(triggerEl)
+    var triggerTabList = [].slice.call(document.querySelectorAll('#myTab button'))
+    triggerTabList.forEach(function (triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl)
 
-    //     triggerEl.addEventListener('click', function (event) {
-    //         event.preventDefault()
-    //         tabTrigger.show()
-    //     })
-    // })
+        triggerEl.addEventListener('click', function (event) {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
 
     $(document).on('input', "#artistPopularity", function() {
         let val = $(this).val();
