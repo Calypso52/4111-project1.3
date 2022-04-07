@@ -8,13 +8,13 @@ import uuid
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
 
+# python files
 import application.index_insert
 import application.album
 import application.artist
 import application.listener
 import application.song
 import application.tracklist
-
 
 DATABASEURI = "postgresql://yz3917:1755@35.211.155.104/proj1part2"
 
