@@ -7,7 +7,8 @@ FETCH_alb = """
         al.release_time, 
         al.popularity, 
         ar.name as artist_name 
-    FROM album al join artist ar on al.artist_id = ar.artist_id
+    FROM album al, artist ar 
+    where al.artist_id = ar.artist_id
 """
 
 INSERT_ALBUM = """
