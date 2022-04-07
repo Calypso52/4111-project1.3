@@ -12,6 +12,10 @@
         margin-left: 20px;
         transform: translateY(-5px);
     }
+
+    .albumText {
+        font-weight: bold;
+    }
 </style>
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'album/album.js') }}"></script>
@@ -28,7 +32,7 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Search Album</button>
+                role="tab" aria-controls="home" aria-selected="true">Find Album</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
@@ -43,7 +47,7 @@
         <!-- search Album function -->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <br>
-            <form action="/Album/find" method="POST" class="row">
+            <form action="/album/find" method="POST" class="row">
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <label for="name" class="form-label">Album Name(Case Insensitive)</label>
@@ -57,30 +61,27 @@
                         <input type="date" class="form-control" id="release_time" name="release_time">
                     </div>
                 </div>
-                <!-- <div class="col-md-12">
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
-                        <label class="form-check-label" for="gender">Male</label>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <br>
+                        <label for="albumPopularity" class="form-label">Artist Popularity(0 - 100)</label>
+                        <input type="range" class="form-range" id="albumPopularity" name="albumPopularity" value="0">
+                        <span id="albumPopularityRangevalFind" class="albumText">0</span>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F">
-                        <label class="form-check-label" for="gender">Female</label>
-                    </div>
-                </div> -->
+                </div>
                 <div class="col-md-12">
                     <br>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">Find</button>
                 </div>
             </form>
         </div>
         <!-- add Album function -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <br>
-            <form action="/Album/add" method="POST" class="row needs-validation" novalidate>
+            <form action="/album/add" method="POST" class="row needs-validation" novalidate>
                 <div class="col-md-12">
                     <div class="col-md-4">
-                        <label for="name" class="form-label">Name(Case Sensitive)</label>
+                        <label for="name" class="form-label">Album Name(Case Sensitive)</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                         <div class="invalid-feedback">Please input Album name.</div>
                     </div>
@@ -88,21 +89,26 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <br>
-                        <label for="release_time" class="form-label">release_time</label>
+                        <label for="artist" class="form-label">Artist Name(Case Insensitive)</label>
+                        <input type="text" class="form-control" id="artist" name="artist" required>
+                        <div class="invalid-feedback">Please input artist name of the album.</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <br>
+                        <label for="release_time" class="form-label">Album Release Time</label>
                         <input type="date" class="form-control" id="release_time" name="release_time" required>
                         <div class="invalid-feedback">Please input release_time.</div>
                     </div>
-                <!-- </div>
+                </div>
                 <div class="col-md-12">
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" required>
-                        <label class="form-check-label" for="gender">Male</label>
+                    <div class="col-md-4">
+                        <br>
+                        <label for="albumPopularityAdd" class="form-label">Album Popularity(0 - 100)</label>
+                        <input type="range" class="form-range" id="albumPopularityAdd" name="albumPopularityAdd" value="0">
+                        <span id="albumPopularityRangevalAdd" class="albumText">0</span>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="F" required>
-                        <label class="form-check-label" for="gender">Female</label>
-                    </div> -->
                 </div>
                 <div class="col-md-12">
                     <br>
@@ -113,12 +119,20 @@
         <!-- delete Album function -->
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <br>
-            <form action="/Album/delete" method="POST" class="row needs-validation" novalidate>
+            <form action="/album/delete" method="POST" class="row needs-validation" novalidate>
                 <div class="col-md-12">
                     <div class="col-md-4">
-                        <label for="name" class="form-label">Name(Case Sensitive)</label>
+                        <label for="name" class="form-label">Album Name(Case Sensitive)</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                         <div class="invalid-feedback">Please input Album name.</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <br>
+                        <label for="artist" class="form-label">Artist Name(Case Insensitive)</label>
+                        <input type="text" class="form-control" id="artist" name="artist" required>
+                        <div class="invalid-feedback">Please input artist name of the album.</div>
                     </div>
                 </div>
                 <div class="col-md-12">

@@ -50,20 +50,54 @@ def album():
   return render_template("album/album.html")
 
 # search router of the album interface
-@app.route('/album/<searchContent>')
+@app.route('/album/<searchContent>', methods=["POST", "GET"])
 def album_search_content(searchContent):
   # store query result array
   result = []
   
-  ########################################### get all data of album ###########################################
   if searchContent == 'all':
     rows = ['album_id', 'name', 'release_time', 'popularity', 'artist_name']
-    query = application.album.fetch_all_albums(None)
+    query = application.album.fetch_all_album(None)
     cursor = g.conn.execute(query)
     for item in cursor:
       result.append(dict(zip(rows, item)))
-  
-  return render_template("album/albumAll.html", **dict(data = result))
+    return render_template("album/albumAll.html", **dict(data = result))
+  elif searchContent == 'find':
+    print('form =', request.form)
+    rows = ['album_id', 'name', 'release_time', 'popularity', 'artist_name']
+    query = application.album.fetch_all_album(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    return render_template("album/albumAll.html", **dict(data = result))
+  elif searchContent == 'add':
+    print('form =', request.form)
+    # get creator name
+    rows = ['artist_id']
+    query = application.album.fetch_artist_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_artist_id =', result[0]["artist_id"])
+      bingo_artist_id = result[0]["artist_id"]
+      query = application.album.add_album(uuid.uuid1(), bingo_artist_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/album")
+  elif searchContent == 'delete':
+    print('form =', request.form)
+    # get creator name
+    rows = ['artist_id']
+    query = application.album.fetch_artist_name(request.form)
+    cursor = g.conn.execute(query)
+    for item in cursor:
+      result.append(dict(zip(rows, item)))
+    if len(result) > 0:
+      print('bingo_artist_id =', result[0]["artist_id"])
+      bingo_artist_id = result[0]["artist_id"]
+      query = application.album.delete_album(bingo_artist_id, request.form)
+      cursor = g.conn.execute(query)
+    return redirect("/album")
 
 
 # route to artist interface

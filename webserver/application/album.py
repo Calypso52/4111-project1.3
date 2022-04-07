@@ -1,20 +1,31 @@
 import logging
 
 FETCH_alb = """
-SELECT a.album_id, a.name as album_name, a.release_time, a.popularity, ar.name as artist_name 
-FROM album a join artist.ar on a.artist_id = ar.artist_id
+    SELECT 
+        al.album_id, 
+        al.name as album_name, 
+        al.release_time, 
+        al.popularity, 
+        ar.name as artist_name 
+    FROM album al join artist ar on al.artist_id = ar.artist_id
 """
 
-INSERT = """INSERT INTO album VALUES('{album_id}', '{name}', '{release_time}', {popularity}, '{artist_id}')"""
+INSERT_ALBUM = """
+    INSERT INTO album VALUES('{album_id}', '{name}', '{release_time}', {popularity}, '{artist_id}')
+"""
 
 DELETE_ALBUM = """
-    DELETE FROM album al WHERE al.name = '{name}'
+    DELETE FROM album al WHERE al.name = '{name}' AND al.artist_id = '{artist_id}'
+"""
+
+FETCH_ARTIST_NAME = """
+    SELECT AR.artist_id FROM artist AR WHERE lower(AR.name) = lower('{}')
 """
 
 queryMap = {
-    "album_id": " AND al.listener_id IN ({})",
+    "album_id": " AND al.album_id IN ({})",
     "name": " AND lower(al.name) LIKE lower('%%{}%%')",
-    "release_time": " AND lower(al.release_time) = lower('{}')",
+    "release_time": " AND al.release_time > '{}'",
     "popularity": " AND al.popularity >= {}"
 }
 
@@ -23,15 +34,20 @@ def fetch_all_album(args):
     if args is not None:
         query += queryMap["name"].format(args['name']) if 'name' in args and len(args['name']) > 0 else ""
         query += queryMap["release_time"].format(args['release_time']) if 'release_time' in args and len(args['release_time']) > 0 else ""
-        query += queryMap["popularity"].format(int(args['age'])) if 'age' in args and len(args['age']) > 0 else ""
+        query += queryMap["popularity"].format(int(args['albumPopularity'])) if 'albumPopularity' in args and len(args['albumPopularity']) > 0 else ""
     return query
 
-def alb(alb_ref, args):
-    add_alb = INSERT
-    add_alb = add_alb.format(fda_id = str(int(alb_ref)), album_id = args['album_id'], name = args['name'], release_time = args['release_time'], popularity = args['popularity'], artist_id = args['artist_id'])
-    return add_alb
+def fetch_artist_name(args):
+    artist_id = FETCH_ARTIST_NAME
+    artist_id = artist_id.format(args["artist"])
+    return artist_id
 
-def delete_al(args):
-    delete_al = DELETE_ALBUM
-    delete_al = delete_al.format(name = args["name"])
-    return delete_al
+def add_album(album_id, artist_id, args):
+    add_album = INSERT_ALBUM
+    add_album = add_album.format(album_id = str(album_id), name = args["name"], release_time = args["release_time"], popularity = args["albumPopularityAdd"], artist_id = artist_id)
+    return add_album
+
+def delete_album(artist_id, args):
+    delete_album = DELETE_ALBUM
+    delete_album = delete_album.format(name = args["name"], artist_id = artist_id)
+    return delete_album
