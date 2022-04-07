@@ -30,7 +30,7 @@ queryMap = {
     "popularity": " AND al.popularity >= {}"
 }
 
-def fetch_all_albums(args):
+def fetch_all_album(args):
     query = FETCH_alb
     if args is not None:
         query += queryMap["name"].format(args['name']) if 'name' in args and len(args['name']) > 0 else ""
